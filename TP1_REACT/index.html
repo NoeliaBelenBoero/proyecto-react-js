@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pie de urna</title>
+    <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-width: 100%;
+            min-height: 140vh;
+            background: linear-gradient(to bottom right, darkblue, cyan);
+        }
+        .root {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+        h1 {
+            color: white;
+            font-size: 60px;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 100px;
+        }
+        .candidato {
+            background-color: white;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 390px;
+            height: 390px;
+            border: 2px solid black;
+            margin-bottom: 30px;
+        }
+        p {
+            font-size: 40px;
+        }
+        h2 {
+            font-size: 120px;
+            color: blue;
+            margin-top: 0;
+            margin-bottom: 50px;
+        }
+
+        button {
+            width: 170px;
+            height: 60px;
+            background-color: #5ca3e9;
+            border-radius: 7px;
+            font-size: 45px;
+            color: white;
+            margin: 5px;
+        }
+        .firstContainer {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+    <script type="text/babel">
+        const {useState} =React;
+        function App() {
+            const [count, setCount] = useState(0);
+            return (
+                <>
+                   <div class="firstContainer">
+                      <h2>{count}</h2>
+                      <div class="btns">
+                        <button onClick={() => setCount((count) => count + 1)}>+</button>
+                        <button onClick={() => setCount((count) => Math.max(count - 1, 0))}>-</button>
+                      </div>
+                    </div>
+                </>
+            )
+        }
+        function Candidato({candidato}) {
+            return (
+                <>
+                  <div class="candidato">
+                    <p><b>Candidato {candidato}</b></p>
+                    <App></App>
+                  </div>
+                </>
+            )
+        }
+        function Pagina() {
+            let datos = [
+                {candidato: 1},
+                {candidato: 2},
+                {candidato: 3}
+            ];
+            return (
+                <>
+                  <h1>Boca de urna</h1>
+                  {datos.map(Candidato)}
+                </>
+            )
+        }
+
+        const rootElement = document.getElementById('root');
+        ReactDOM.render(<Pagina />, rootElement);
+    </script>
+</head>
+<body>
+   <main class="root" id="root"></main> 
+</body>
+</html>
